@@ -20,7 +20,7 @@ func DbGet(w http.ResponseWriter, req *http.Request) {
 
 	rows, err := db.Query("SELECT json FROM storage WHERE id = " + id)
 	if err != nil {
-		w.Write([]byte("{'status': 'nok'}"))
+		w.Write([]byte(fmt.Sprintf("{'status': 'nok', 'err': '%s'}", err)))
 		return
 	}
 	defer rows.Close()
@@ -34,7 +34,7 @@ func DbPost(w http.ResponseWriter, req *http.Request) {
 	js, _ := ioutil.ReadAll(req.Body)
 	q := fmt.Sprintf("insert into storage values('%s', '%s') on conflict (id) do update set json = Excluded.json", id, js)
 	if _, err := db.Exec(q); err != nil {
-		w.Write([]byte("{'status': 'nok'}"))
+		w.Write([]byte(fmt.Sprintf("{'status': 'nok', 'err': '%s'}", err)))
 		return
 	}
 	w.Write([]byte("{'status': 'ok'}"))
