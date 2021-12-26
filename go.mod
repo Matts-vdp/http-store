@@ -1,3 +1,3 @@
-module github.com/Matts-vdp/http-store
+module http-store
 
 go 1.16
