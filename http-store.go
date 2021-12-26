@@ -7,6 +7,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	_ "github.com/lib/pq"
 )
 
 func Index(w http.ResponseWriter, req *http.Request) {
