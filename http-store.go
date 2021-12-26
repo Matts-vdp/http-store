@@ -6,11 +6,11 @@ import (
 )
 
 func Index(w http.ResponseWriter, req *http.Request) {
-	http.ServeFile(w, req, "view/index.html")
+	w.Write([]byte("hallo"))
 }
 
 func main() {
 	port := os.Getenv("PORT")
-	http.HandleFunc("/"+port, Index)
-	http.ListenAndServe(":80", nil)
+	http.HandleFunc("/", Index)
+	http.ListenAndServe(":"+port, nil)
 }
