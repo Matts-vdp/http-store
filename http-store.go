@@ -45,7 +45,7 @@ func DbPost(w http.ResponseWriter, req *http.Request) {
 		fmt.Printf("Error inserting: %s", id)
 		return
 	}
-	w.Write([]byte("{'status', 'ok'}"))
+	w.Write([]byte("{'status': 'ok'}"))
 }
 
 var db *sql.DB
