@@ -34,20 +34,20 @@ func DbGet(w http.ResponseWriter, req *http.Request) {
 
 func DbPost(w http.ResponseWriter, req *http.Request) {
 	w.Write([]byte("start"))
-	/*if _, err := db.Exec("CREATE TABLE IF NOT EXISTS storage (id varchar(20) primary key, json text)"); err != nil {
+	if _, err := db.Exec("CREATE TABLE IF NOT EXISTS storage (id varchar(20) primary key, json text)"); err != nil {
 		fmt.Printf("Error creating database table: %q", err)
 		w.Write([]byte("error creation"))
 		return
-	}
-	id := req.URL.Query()["id"][0]
-	js, _ := ioutil.ReadAll(req.Body)
-	q := fmt.Sprintf("INSERT INTO storage VALUES (%s, %s)", id, js)
-	if _, err := db.Exec(q); err != nil {
-		fmt.Printf("Error inserting: %s", id)
-		w.Write([]byte("error inserting"))
-		return
-	}
-	w.Write([]byte("{'status': 'ok'}"))*/
+	} /*
+		id := req.URL.Query()["id"][0]
+		js, _ := ioutil.ReadAll(req.Body)
+		q := fmt.Sprintf("INSERT INTO storage VALUES (%s, %s)", id, js)
+		if _, err := db.Exec(q); err != nil {
+			fmt.Printf("Error inserting: %s", id)
+			w.Write([]byte("error inserting"))
+			return
+		}
+		w.Write([]byte("{'status': 'ok'}"))*/
 }
 
 var db *sql.DB
