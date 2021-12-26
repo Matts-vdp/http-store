@@ -30,7 +30,8 @@ func DbGet(w http.ResponseWriter, req *http.Request) {
 }
 
 func DbPost(w http.ResponseWriter, req *http.Request) {
-	id := req.URL.Query()["id"][0]
+	req.ParseForm()
+	id := req.Form.Get("id")
 	js, _ := ioutil.ReadAll(req.Body)
 	_, err := db.Query("insert into storage values($1, $2) on conflict (id) do update set json = Excluded.json", id, js)
 	if err != nil {
