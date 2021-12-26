@@ -34,6 +34,7 @@ func DbGet(w http.ResponseWriter, req *http.Request) {
 }
 
 func DbPost(w http.ResponseWriter, req *http.Request) {
+	w.Write([]byte("start"))
 	if _, err := db.Exec("CREATE TABLE IF NOT EXISTS storage (id varchar(20) primary key, json text)"); err != nil {
 		fmt.Printf("Error creating database table: %q", err)
 		w.Write([]byte("error creation"))
