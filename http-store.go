@@ -18,7 +18,7 @@ func Index(w http.ResponseWriter, req *http.Request) {
 func DbGet(w http.ResponseWriter, req *http.Request) {
 	id := req.URL.Query()["id"][0]
 
-	rows, err := db.Query(fmt.Sprintf("SELECT json FROM storage WHERE id = '%s'", id))
+	rows, err := db.Query("SELECT json FROM storage WHERE id = '?'", id)
 	if err != nil {
 		w.Write([]byte(fmt.Sprintf("{'status': 'nok', 'err': '%s'}", err)))
 		return
@@ -32,8 +32,8 @@ func DbGet(w http.ResponseWriter, req *http.Request) {
 func DbPost(w http.ResponseWriter, req *http.Request) {
 	id := req.URL.Query()["id"][0]
 	js, _ := ioutil.ReadAll(req.Body)
-	q := fmt.Sprintf("insert into storage values('%s', '%s') on conflict (id) do update set json = Excluded.json", id, js)
-	if _, err := db.Exec(q); err != nil {
+	_, err := db.Query("insert into storage values('?', '?') on conflict (id) do update set json = Excluded.json", id, js)
+	if err != nil {
 		w.Write([]byte(fmt.Sprintf("{'status': 'nok', 'err': '%s'}", err)))
 		return
 	}
