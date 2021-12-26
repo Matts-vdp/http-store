@@ -58,7 +58,7 @@ func main() {
 		log.Fatalf("Error opening database: %q", err)
 	}
 	http.HandleFunc("/", Index)
-	http.HandleFunc("/dbget", Index)
-	http.HandleFunc("/dbpost", Index)
+	http.HandleFunc("/dbget", DbGet)
+	http.HandleFunc("/dbpost", DbPost)
 	http.ListenAndServe(":"+port, nil)
 }
