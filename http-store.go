@@ -37,7 +37,7 @@ func DbPost(w http.ResponseWriter, req *http.Request) {
 	w.Write([]byte("start2"))
 	q := fmt.Sprintf("INSERT INTO storage VALUES (%s, %s) on conflict do update set json=%s", id, js, js)
 	if _, err := db.Exec(q); err != nil {
-		fmt.Printf("Error inserting: %s", id)
+		fmt.Println("Error inserting:", id, err)
 		w.Write([]byte("error inserting" + id))
 		return
 	}
