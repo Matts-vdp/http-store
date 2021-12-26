@@ -18,7 +18,7 @@ func Index(w http.ResponseWriter, req *http.Request) {
 func DbGet(w http.ResponseWriter, req *http.Request) {
 	id := req.URL.Query()["id"][0]
 
-	rows, err := db.Query("SELECT json FROM storage WHERE id = " + id)
+	rows, err := db.Query(fmt.Sprintf("SELECT json FROM storage WHERE id = '%s'", id))
 	if err != nil {
 		w.Write([]byte(fmt.Sprintf("{'status': 'nok', 'err': '%s'}", err)))
 		return
