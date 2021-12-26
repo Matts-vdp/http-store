@@ -25,6 +25,7 @@ func DbGet(w http.ResponseWriter, req *http.Request) {
 	}
 	defer rows.Close()
 	var str string
+	rows.Next()
 	rows.Scan(&str)
 	w.Write([]byte(str))
 }
