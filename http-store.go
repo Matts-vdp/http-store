@@ -32,6 +32,7 @@ func DbGet(w http.ResponseWriter, req *http.Request) {
 func DbPost(w http.ResponseWriter, req *http.Request) {
 	w.Write([]byte("start"))
 	id := req.URL.Query()["id"][0]
+	w.Write([]byte("start3"))
 	js, _ := ioutil.ReadAll(req.Body)
 	w.Write([]byte("start2"))
 	q := fmt.Sprintf("INSERT INTO storage VALUES (%s, %s)", id, js)
