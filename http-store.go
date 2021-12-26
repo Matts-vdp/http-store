@@ -3,7 +3,6 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -35,7 +34,7 @@ func DbGet(w http.ResponseWriter, req *http.Request) {
 
 func DbPost(w http.ResponseWriter, req *http.Request) {
 	w.Write([]byte("start"))
-	if _, err := db.Exec("CREATE TABLE IF NOT EXISTS storage (id varchar(20) primary key, json text)"); err != nil {
+	/*if _, err := db.Exec("CREATE TABLE IF NOT EXISTS storage (id varchar(20) primary key, json text)"); err != nil {
 		fmt.Printf("Error creating database table: %q", err)
 		w.Write([]byte("error creation"))
 		return
@@ -48,7 +47,7 @@ func DbPost(w http.ResponseWriter, req *http.Request) {
 		w.Write([]byte("error inserting"))
 		return
 	}
-	w.Write([]byte("{'status': 'ok'}"))
+	w.Write([]byte("{'status': 'ok'}"))*/
 }
 
 var db *sql.DB
