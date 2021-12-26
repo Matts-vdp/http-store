@@ -3,7 +3,6 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -33,7 +32,7 @@ func DbGet(w http.ResponseWriter, req *http.Request) {
 func DbPost(w http.ResponseWriter, req *http.Request) {
 	req.ParseForm()
 	id := req.Form.Get("id")
-	js, _ := ioutil.ReadAll(req.Body)
+	js := req.Form.Get("json")
 	_, err := db.Query("insert into storage values($1, $2) on conflict (id) do update set json = Excluded.json", id, js)
 	if err != nil {
 		w.Write([]byte(fmt.Sprintf("{'status': 'nok', 'err': '%s'}", err)))
